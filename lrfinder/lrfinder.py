@@ -88,11 +88,14 @@ class LRFinder:
 			n_skip_beginning - number of batches to skip on the left.
 			n_skip_end - number of batches to skip on the right.
 		"""
-		plt.ylabel("loss")
-		plt.xlabel("learning rate (log scale)")
-		plt.plot(self.lrs[n_skip_beginning:-n_skip_end], self.losses[n_skip_beginning:-n_skip_end])
-		plt.xscale(x_scale)
-		plt.show()
+
+		f, ax = plt.subplots()
+
+		ax.set_ylabel("loss")
+		ax.set_xlabel("learning rate (log scale)")
+		ax.plot(self.lrs[n_skip_beginning:-n_skip_end], self.losses[n_skip_beginning:-n_skip_end])
+		ax.set_xscale(x_scale)
+		return(ax)
 
 	def plot_loss_change(self, sma=1, n_skip_beginning=10, n_skip_end=5, y_lim=(-0.01, 0.01)):
 		"""
@@ -105,12 +108,15 @@ class LRFinder:
 		"""
 		derivatives = self.get_derivatives(sma)[n_skip_beginning:-n_skip_end]
 		lrs = self.lrs[n_skip_beginning:-n_skip_end]
-		plt.ylabel("rate of loss change")
-		plt.xlabel("learning rate (log scale)")
-		plt.plot(lrs, derivatives)
-		plt.xscale('log')
-		plt.ylim(y_lim)
-		plt.show()
+
+		f, ax = plt.subplots()
+		ax.set_ylabel("rate of loss change")
+		ax.set_xlabel("learning rate (log scale)")
+		ax.plot(lrs, derivatives)
+		ax.set_xscale('log')
+		ax.set_ylim(y_lim)
+		
+		return(ax)
 
 	def get_derivatives(self, sma):
 		assert sma >= 1
