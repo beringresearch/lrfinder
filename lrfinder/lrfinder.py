@@ -43,9 +43,7 @@ class LRFinder:
 		K.set_value(self.model.optimizer.lr, lr)
 
 
-	def find(self, dataset, start_lr, end_lr, epochs=1, steps_per_epoch=None, batch_size=32, **kw_fit):
-		# If x_train contains data for multiple inputs, use length of the first input.
-		# Assumption: the first element in the list is single input; NOT a list of inputs.
+	def find(self, dataset, start_lr, end_lr, epochs=1, **kw_fit):
 
 		if steps_per_epoch is None:
 			try:
@@ -58,6 +56,7 @@ class LRFinder:
 						'or use the `keras.utils.Sequence` class.')
 
 		self.lr_mult = (float(end_lr) / float(start_lr)) ** (float(1) / float(epochs * steps_per_epoch))
+		
 		# Save weights into a file
 		initial_weights = self.model.get_weights()
 
@@ -70,9 +69,9 @@ class LRFinder:
 		callback = LambdaCallback(on_batch_end=lambda batch, logs: self.on_batch_end(batch, logs))
 
 		self.model.fit(dataset,
-				batch_size=batch_size, epochs=epochs,
-				callbacks=[callback],
-				**kw_fit)
+			epochs=epochs,
+			callbacks=[callback],
+			**kw_fit)
 
 		# Restore the weights to the state before model fitting
 		self.model.set_weights(initial_weights)
