@@ -9,6 +9,7 @@ setup(name='lrfinder',
       license='TBD',
       packages=['lrfinder'],
       install_requires=[
-            'tensorflow>=2.1.0'
+            'tensorflow',
+            'matplotlib'
       ],
       zip_safe=False)
