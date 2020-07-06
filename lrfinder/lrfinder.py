@@ -43,7 +43,7 @@ class LRFinder:
 		K.set_value(self.model.optimizer.lr, lr)
 
 
-	def find(self, dataset, start_lr, end_lr, epochs=1, **kw_fit):
+	def find(self, dataset, start_lr, end_lr, epochs=1, steps_per_epoch=None, **kw_fit):
 
 		if steps_per_epoch is None:
 			try:
