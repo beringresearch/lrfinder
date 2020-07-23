@@ -4,12 +4,10 @@ setup(name='lrfinder',
       version='0.1',
       description='Learning rate finder.',
       url='http://github.com/beringresearch/lrfinder',
-      author='Ignat Drozdov',
-      author_email='idrozdov@beringresearch',
-      license='TBD',
+      author='Bering Limited',
+      license='Apache 2.0',
       packages=['lrfinder'],
       install_requires=[
             'tensorflow',
-            'matplotlib'
       ],
       zip_safe=False)
